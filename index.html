@@ -70,13 +70,14 @@
     }
 
     .speaker-name {
-        font-size: 13px;
-        color: #666;
-        margin-top: 4px;
-        text-align: center;
-        word-break: break-all;
-        max-width: 60px;
-    }
+		font-size: 13px;
+		color: #2e5c8a;         /* 与上述名字颜色一致 */
+		font-weight: bold;      /* 加粗 */
+		margin-top: 4px;
+		text-align: center;
+		word-break: break-all;
+		max-width: 60px;
+	}
 
 	/* Dialogue Case Styles */
 	.dialogue-case {
@@ -241,62 +242,55 @@
     <div class="hero-body">
         <div class="container">
             <h1 id="sharechatx" class="title is-3">Samples of Persona-Dialogue dataset.</h1>
-			<img class="img" src="res/fig1.png" style="display: block; margin: 0 auto; max-width: 60%; height: auto; border: 2px solid lightgray;">
+			<!-- <img class="img" src="res/fig1.png" style="display: block; margin: 0 auto; max-width: 60%; height: auto; border: 2px solid lightgray;"> -->
 			<!-- <h4 id="emotion" class="title is-4" style="text-align: center;margin-top: 20px;">A.1. ShareChatx-Emotion</h4> -->
 				<div class="case-container">
 					<div class="case-card">
 						<h2>Case 1</h2>
-                        <div style="border:2px solid #b0c4de; border-radius:10px; padding:18px; margin-bottom:30px; background-color:#f7faff;">
-                            <strong>Scenario：</strong> Family life<br>
-                            <strong>Theme：</strong> Weekly Grocery Shopping List<br>
-                            <strong>User：</strong>
-                            <pre style="white-space:pre-wrap; background: #f5f5f5; border-radius: 8px; padding: 12px; margin-top: 8px; font-size: 14px;">
-                                  {
-                                      "name": "George Hanson",
-                                      "identity": "Father",
-                                      "description": [
-                                          "George is a middle-aged man with spectacles and a hearty laugh.",
-                                          "A software engineer by profession, he cherishes quiet evenings reading books.",
-                                          "He is a practical thinker, with a dry sense of humor that often has the family in stitches.",
-                                          "Caring and soft-hearted, George is always there for his children even amidst a busy schedule.",
-                                          "Outdoor activities like camping, fishing and hiking appeal to him."
-                                      ]
-                                  },
-                                  {
-                                      "name": "Lisa Hanson",
-                                      "identity": "Mother",
-                                      "description": [
-                                          "Lisa is a woman full of energy and zest.",
-                                          "She's a teacher who loves connecting with her students.",
-                                          "Right from cooking, painting, to managing household chores, she's multitasking always.",
-                                          "She is understanding, patient and fiercely protective of her family.",
-                                          "Lisa enjoys gardening and long walks in the park every evening."
-                                      ]
-                                  },
-                                  {
-                                      "name": "Abigail Hanson",
-                                      "identity": "Eldest Daughter",
-                                      "description": [
-                                          "Abigail is an 18-year-old teenager, about to go to college.",
-                                          "She is studious, ambitious, and slightly introverted.",
-                                          "Music is her life - she loves playing the piano and listening to classical music.",
-                                          "She usually wears glasses, but switches to contact lenses for special occasions.",
-                                          "Abigail is mature for her age and is often seen guiding her younger siblings."
-                                      ]
-                                  },
-                                  {
-                                      "name": "Ben Hanson",
-                                      "identity": "Son",
-                                      "description": [
-                                          "Ben, the 16-year-old lad is full of life and the energy of the house.",
-                                          "As an aspiring basketball player, he always practices in the backyard.",
-                                          "He has a mischievous side, always ready to pull pranks on family and friends.",
-                                          "His jovial attitude and carefree spirit are what set him apart from his siblings.",
-                                          "Despite his tomfoolery, Ben is compassionate and caring towards his family."
-                                      ]
-                                  }
-                            </pre>
-                          </div>
+                        <div style="border:2px solid #b0c4de; border-radius:10px; padding:22px; margin-bottom:30px; background-color:#f7faff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+							<div style="font-size: 18px; font-weight: bold; color: #305080; margin-bottom: 10px;">
+							  <span style="margin-right: 15px;">&#127968; <strong>Scenario：</strong> Family life</span>
+							  <span>&#128722; <strong>Theme：</strong> Weekly Grocery Shopping List</span>
+							</div>
+							<div style="margin-bottom: 8px; font-size: 16px; color: #49668c;">
+							  <strong>User：</strong>
+							</div>
+							<div style="background: #f5f5f5; border-radius: 10px; padding: 16px 18px; font-size: 15px; color: #444;">
+							  <div style="margin-bottom: 12px;">
+								<span style="font-weight: bold; color: #2e5c8a;">George Hanson</span> <span style="color:#777;">(Father)</span>：
+								<span>George is a middle-aged man with spectacles and a hearty laugh.</span>
+								<span>A software engineer by profession, he cherishes quiet evenings reading books.</span>
+								<span>He is a practical thinker, with a dry sense of humor that often has the family in stitches.</span>
+								<span>Caring and soft-hearted, George is always there for his children even amidst a busy schedule.</span>
+								<span>Outdoor activities like camping, fishing and hiking appeal to him.</span>
+							  </div>
+							  <div style="margin-bottom: 12px;">
+								<span style="font-weight: bold; color: #2e5c8a;">Lisa Hanson</span> <span style="color:#777;">(Mother)</span>：
+								<span>Lisa is a woman full of energy and zest.</span>
+								<span>She's a teacher who loves connecting with her students.</span>
+								<span>Right from cooking, painting, to managing household chores, she's multitasking always.</span>
+								<span>She is understanding, patient and fiercely protective of her family.</span>
+								<span>Lisa enjoys gardening and long walks in the park every evening.</span>
+							  </div>
+							  <div style="margin-bottom: 12px;">
+								<span style="font-weight: bold; color: #2e5c8a;">Abigail Hanson</span> <span style="color:#777;">(Eldest Daughter)</span>：
+								<span>Abigail is an 18-year-old teenager, about to go to college.</span>
+								<span>She is studious, ambitious, and slightly introverted.</span>
+								<span>Music is her life - she loves playing the piano and listening to classical music.</span>
+								<span>She usually wears glasses, but switches to contact lenses for special occasions.</span>
+								<span>Abigail is mature for her age and is often seen guiding her younger siblings.</span>
+							  </div>
+							  <div>
+								<span style="font-weight: bold; color: #2e5c8a;">Ben Hanson</span> <span style="color:#777;">(Son)</span>：
+								<span>Ben, the 16-year-old lad is full of life and the energy of the house.</span>
+								<span>As an aspiring basketball player, he always practices in the backyard.</span>
+								<span>He has a mischievous side, always ready to pull pranks on family and friends.</span>
+								<span>His jovial attitude and carefree spirit are what set him apart from his siblings.</span>
+								<span>Despite his tomfoolery, Ben is compassionate and caring towards his family.</span>
+							  </div>
+							</div>
+						  </div>
+我也算了吧你说						  
 						<div class="dialogue-case left">
 						    <div class="avatar-block">
                                 <img class="logo" src="res/human.png" alt="User Logo">
@@ -444,46 +438,42 @@
 
                     <div class="case-card">
 						<h2>Case 2</h2>
-                        <div style="border:2px solid #b0c4de; border-radius:10px; padding:18px; margin-bottom:30px; background-color:#f7faff;">
-                            <strong>Scenario：</strong>Company meeting<br>
-                            <strong>Theme：</strong>Future Investment Ideas<br>
-                            <strong>User：</strong>
-                            <pre style="white-space:pre-wrap; background: #f5f5f5; border-radius: 8px; padding: 12px; margin-top: 8px; font-size: 14px;">
-								{
-									"name": "Lisa Branson",
-									"identity": "Marketing Director",
-									"description": [
-										"Lisa Branson is the Marketing Director. She is a powerhouse in the field of commerce, known for her innovative marketing strategies.",
-										"Her charismatic charm often wins over clients effortlessly.",
-										"She usually disagrees with John on many issues during meetings, leading to productive debates.",
-										"Branson loves to travel and often brings back souvenirs for her colleagues.",
-										"Despite her success, she remains approachable and is a mentor to many of the junior staff."
-									]
-								},
-								{
-									"name": "Tom Clark",
-									"identity": "Financial Manager",
-									"description": [
-										"Tom Clark is the meticulous Financial Manager. He is the man with the numbers and is often seen with his calculator and spreadsheets.",
-										"An introvert by nature, Clark prefers letting his work do the talking.",
-										"He is respected for his analytical skills and helping the company survive tough times.",
-										"Clark is a chess enthusiast and often likens strategic financial planning to a game of chess.",
-										"Although he tends to keep to himself, he's known to make sarcastic comments that lighten the mood during meetings."
-									]
-								},
-								{
-									"name": "Kim Landon",
-									"identity": "HR Manager",
-									"description": [
-										"Kim Landon is the empathetic HR Manager. She is the go-to person for any staff-related issues and grievances.",
-										"Landon is loved by her colleagues for her pro-employee policies.",
-										"She enjoys her early morning yoga before starting her day.",
-										"She is an advocate for work-life balance and mental health awareness in the workplace.",
-										"Her open-door policy makes other employees feel heard and respected."
-									]
-								}
-                            </pre>
-                          </div>
+                        <div style="border:2px solid #b0c4de; border-radius:10px; padding:22px; margin-bottom:30px; background-color:#f7faff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+							<div style="font-size: 18px; font-weight: bold; color: #305080; margin-bottom: 10px;">
+							  <span style="margin-right: 15px;">&#128188; <strong>Scenario：</strong> Company meeting</span>
+							  <span>&#128200; <strong>Theme：</strong> Future Investment Ideas</span>
+							</div>
+							<div style="margin-bottom: 8px; font-size: 16px; color: #49668c;">
+							  <strong>User：</strong>
+							</div>
+							<div style="background: #f5f5f5; border-radius: 10px; padding: 16px 18px; font-size: 15px; color: #444;">
+							  <div style="margin-bottom: 12px;">
+								<span style="font-weight: bold; color: #2e5c8a;">Lisa Branson</span> <span style="color:#777;">(Marketing Director)</span>：
+								<span>Lisa Branson is the Marketing Director. She is a powerhouse in the field of commerce, known for her innovative marketing strategies.</span>
+								<span>Her charismatic charm often wins over clients effortlessly.</span>
+								<span>She usually disagrees with John on many issues during meetings, leading to productive debates.</span>
+								<span>Branson loves to travel and often brings back souvenirs for her colleagues.</span>
+								<span>Despite her success, she remains approachable and is a mentor to many of the junior staff.</span>
+							  </div>
+							  <div style="margin-bottom: 12px;">
+								<span style="font-weight: bold; color: #2e5c8a;">Tom Clark</span> <span style="color:#777;">(Financial Manager)</span>：
+								<span>Tom Clark is the meticulous Financial Manager. He is the man with the numbers and is often seen with his calculator and spreadsheets.</span>
+								<span>An introvert by nature, Clark prefers letting his work do the talking.</span>
+								<span>He is respected for his analytical skills and helping the company survive tough times.</span>
+								<span>Clark is a chess enthusiast and often likens strategic financial planning to a game of chess.</span>
+								<span>Although he tends to keep to himself, he's known to make sarcastic comments that lighten the mood during meetings.</span>
+							  </div>
+							  <div>
+								<span style="font-weight: bold; color: #2e5c8a;">Kim Landon</span> <span style="color:#777;">(HR Manager)</span>：
+								<span>Kim Landon is the empathetic HR Manager. She is the go-to person for any staff-related issues and grievances.</span>
+								<span>Landon is loved by her colleagues for her pro-employee policies.</span>
+								<span>She enjoys her early morning yoga before starting her day.</span>
+								<span>She is an advocate for work-life balance and mental health awareness in the workplace.</span>
+								<span>Her open-door policy makes other employees feel heard and respected.</span>
+							  </div>
+							</div>
+						  </div>
+						  
 						<div class="dialogue-case left">
 						    <div class="avatar-block">
                                 <img class="logo" src="res/human.png" alt="User Logo">
@@ -590,57 +580,50 @@
 
 					<div class="case-card">
 						<h2>Case 3</h2>
-                        <div style="border:2px solid #b0c4de; border-radius:10px; padding:18px; margin-bottom:30px; background-color:#f7faff;">
-                            <strong>Scenario：</strong>School classroom<br>
-                            <strong>Theme：</strong>Cultural Event Planning<br>
-                            <strong>User：</strong>
-                            <pre style="white-space:pre-wrap; background: #f5f5f5; border-radius: 8px; padding: 12px; margin-top: 8px; font-size: 14px;">
-								{
-									"name": "Mrs. Thompson",
-									"identity": "Teacher",
-									"description": [
-										"Mrs. Thompson is an experienced educator with a warm personality.",
-										"She carries a sense of authority that inspires respect but maintains a caring approach towards her students.",
-										"Her engaging teaching style helps to foster a love of learning within her classroom.",
-										"Mrs. Thompson has a sharp eye for detail, spotting students who may need extra support.",
-										"Aside from teaching, she spends her spare time indulging in her love for painting."
-									]
-								},
-								{
-									"name": "John",
-									"identity": "Student",
-									"description": [
-										"John is a quiet, reserved student who is more comfortable around books than people.",
-										"He excels in academics, particularly mathematics and science.",
-										"Despite his introverted nature, he is empathetic and always willing to help his classmates.",
-										"John has a hidden talent in chess and often competes in school tournaments.",
-										"His dream is to become an astronaut, a passion spurred by his fascination with the cosmos."
-									]
-								},
-								{
-									"name": "Emma",
-									"identity": "Student",
-									"description": [
-										"Emma is the vivacious class president, who is beloved by her peers for her cheerful nature.",
-										"She excels in public speaking and is always first to volunteer for any school event.",
-										"Emma is naturally athletic, being a part of the school's soccer team.",
-										"Her energetic personality is infectious and she has an innate talent to motivate others.",
-										"She aspires to pursue a career in politics or social work."
-									]
-								},
-								{
-									"name": "Rachel",
-									"identity": "Student",
-									"description": [
-										"Rachel is a popular student with a flair for fashion and makeup.",
-										"Known for her sense of humor, she is often the life of the party.",
-										"Despite her popularity, Rachel is down-to-earth and friendly towards everyone.",
-										"She has a passion for photography and manages the school yearbook.",
-										"Rachel hopes to create her own fashion line one day."
-									]
-								}
-                            </pre>
-                          </div>
+                        <div style="border:2px solid #b0c4de; border-radius:10px; padding:22px; margin-bottom:30px; background-color:#f7faff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+							<div style="font-size: 18px; font-weight: bold; color: #305080; margin-bottom: 10px;">
+							  <span style="margin-right: 15px;">&#127891; <strong>Scenario：</strong> School classroom</span>
+							  <span>&#127912; <strong>Theme：</strong> Cultural Event Planning</span>
+							</div>
+							<div style="margin-bottom: 8px; font-size: 16px; color: #49668c;">
+							  <strong>User：</strong>
+							</div>
+							<div style="background: #f5f5f5; border-radius: 10px; padding: 16px 18px; font-size: 15px; color: #444;">
+							  <div style="margin-bottom: 12px;">
+								<span style="font-weight: bold; color: #2e5c8a;">Mrs. Thompson</span> <span style="color:#777;">(Teacher)</span>：
+								<span>Mrs. Thompson is an experienced educator with a warm personality.</span>
+								<span>She carries a sense of authority that inspires respect but maintains a caring approach towards her students.</span>
+								<span>Her engaging teaching style helps to foster a love of learning within her classroom.</span>
+								<span>Mrs. Thompson has a sharp eye for detail, spotting students who may need extra support.</span>
+								<span>Aside from teaching, she spends her spare time indulging in her love for painting.</span>
+							  </div>
+							  <div style="margin-bottom: 12px;">
+								<span style="font-weight: bold; color: #2e5c8a;">John</span> <span style="color:#777;">(Student)</span>：
+								<span>John is a quiet, reserved student who is more comfortable around books than people.</span>
+								<span>He excels in academics, particularly mathematics and science.</span>
+								<span>Despite his introverted nature, he is empathetic and always willing to help his classmates.</span>
+								<span>John has a hidden talent in chess and often competes in school tournaments.</span>
+								<span>His dream is to become an astronaut, a passion spurred by his fascination with the cosmos.</span>
+							  </div>
+							  <div style="margin-bottom: 12px;">
+								<span style="font-weight: bold; color: #2e5c8a;">Emma</span> <span style="color:#777;">(Student)</span>：
+								<span>Emma is the vivacious class president, who is beloved by her peers for her cheerful nature.</span>
+								<span>She excels in public speaking and is always first to volunteer for any school event.</span>
+								<span>Emma is naturally athletic, being a part of the school's soccer team.</span>
+								<span>Her energetic personality is infectious and she has an innate talent to motivate others.</span>
+								<span>She aspires to pursue a career in politics or social work.</span>
+							  </div>
+							  <div>
+								<span style="font-weight: bold; color: #2e5c8a;">Rachel</span> <span style="color:#777;">(Student)</span>：
+								<span>Rachel is a popular student with a flair for fashion and makeup.</span>
+								<span>Known for her sense of humor, she is often the life of the party.</span>
+								<span>Despite her popularity, Rachel is down-to-earth and friendly towards everyone.</span>
+								<span>She has a passion for photography and manages the school yearbook.</span>
+								<span>Rachel hopes to create her own fashion line one day.</span>
+							  </div>
+							</div>
+						  </div>
+						  
 						<div class="dialogue-case left">
 						    <div class="avatar-block">
                                 <img class="logo" src="res/human.png" alt="User Logo">
@@ -722,46 +705,42 @@
 
 					<div class="case-card">
 						<h2>Case 4</h2>
-                        <div style="border:2px solid #b0c4de; border-radius:10px; padding:18px; margin-bottom:30px; background-color:#f7faff;">
-                            <strong>Scenario：</strong>Park<br>
-                            <strong>Theme：</strong>Talking about their pets<br>
-                            <strong>User：</strong>
-                            <pre style="white-space:pre-wrap; background: #f5f5f5; border-radius: 8px; padding: 12px; margin-top: 8px; font-size: 14px;">
-								{
-									"name": "Linda Watson",
-									"identity": "Single Mother",
-									"description": [
-										"Linda Watson is a single mom with two energetic boys",
-										" She works as a nurse during the week and tries to spend most weekends in the park with her sons",
-										" Her tired eyes cannot conceal the love and affection she carries for her children",
-										" Despite the everyday hardship, she manages to keep a heartwarming smile on her face",
-										" She's also a regular volunteer at the local community center."
-									]
-								},
-								{
-									"name": "Paul Stevens",
-									"identity": "Retiree",
-									"description": [
-										"Paul Stevens is a retired professor living alone since the passing of his wife",
-										" He comes to the park to enjoy the tranquility and nature, often seen feeding the swans by the lake",
-										" He enjoys sharing stories from his past with anyone willing to lend an ear",
-										" Paul also carries a book everywhere as reading is his number one passion",
-										" His gentle demeanor and warm heart make him loved among regular park goers."
-									]
-								},
-								{
-									"name": "Emily Decker",
-									"identity": "University Student",
-									"description": [
-										"Emily Decker is an outgoing University student on an athletic scholarship",
-										" She's often at the park in the early morning jogging for her cardiovascular training",
-										" Smart, confident, and ambitious, Emily has her eyes set on the Olympics",
-										" She's majoring in computer science, managing to balance her studies and training flawlessly",
-										" Not only she is talented in sports, but she's also an artist, often sketching park scenes."
-									]
-								}
-                            </pre>
-                          </div>
+                        <div style="border:2px solid #b0c4de; border-radius:10px; padding:22px; margin-bottom:30px; background-color:#f7faff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+							<div style="font-size: 18px; font-weight: bold; color: #305080; margin-bottom: 10px;">
+							  <span style="margin-right: 15px;">&#127795; <strong>Scenario：</strong> Park</span>
+							  <span>&#128054; <strong>Theme：</strong> Talking about their pets</span>
+							</div>
+							<div style="margin-bottom: 8px; font-size: 16px; color: #49668c;">
+							  <strong>User：</strong>
+							</div>
+							<div style="background: #f5f5f5; border-radius: 10px; padding: 16px 18px; font-size: 15px; color: #444;">
+							  <div style="margin-bottom: 12px;">
+								<span style="font-weight: bold; color: #2e5c8a;">Linda Watson</span> <span style="color:#777;">(Single Mother)</span>：
+								<span>Linda Watson is a single mom with two energetic boys.</span>
+								<span>She works as a nurse during the week and tries to spend most weekends in the park with her sons.</span>
+								<span>Her tired eyes cannot conceal the love and affection she carries for her children.</span>
+								<span>Despite the everyday hardship, she manages to keep a heartwarming smile on her face.</span>
+								<span>She's also a regular volunteer at the local community center.</span>
+							  </div>
+							  <div style="margin-bottom: 12px;">
+								<span style="font-weight: bold; color: #2e5c8a;">Paul Stevens</span> <span style="color:#777;">(Retiree)</span>：
+								<span>Paul Stevens is a retired professor living alone since the passing of his wife.</span>
+								<span>He comes to the park to enjoy the tranquility and nature, often seen feeding the swans by the lake.</span>
+								<span>He enjoys sharing stories from his past with anyone willing to lend an ear.</span>
+								<span>Paul also carries a book everywhere as reading is his number one passion.</span>
+								<span>His gentle demeanor and warm heart make him loved among regular park goers.</span>
+							  </div>
+							  <div>
+								<span style="font-weight: bold; color: #2e5c8a;">Emily Decker</span> <span style="color:#777;">(University Student)</span>：
+								<span>Emily Decker is an outgoing University student on an athletic scholarship.</span>
+								<span>She's often at the park in the early morning jogging for her cardiovascular training.</span>
+								<span>Smart, confident, and ambitious, Emily has her eyes set on the Olympics.</span>
+								<span>She's majoring in computer science, managing to balance her studies and training flawlessly.</span>
+								<span>Not only she is talented in sports, but she's also an artist, often sketching park scenes.</span>
+							  </div>
+							</div>
+						  </div>
+						  
 						<div class="dialogue-case left">
 						    <div class="avatar-block">
                                 <img class="logo" src="res/human.png" alt="User Logo">
