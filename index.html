@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Umss">
+  <meta property="og:title" content="PACHAT: Persona-Aware Speech Assistant for Multi-party Dialogue"/>
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">    
+  
+  <title>OmniChat</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  <link rel="stylesheet" href="static/css/audio-table.css">
+  <link rel="stylesheet" type="text/css" href="static/css/dropdown_style.css">
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+<style>
+	footer {
+            background-color: #e0f7fa; /* 浅蓝色背景 */
+            text-align: center; /* 居中文字 */
+            padding: 10px; /* 页脚内边距 */
+            margin-top: 20px; /* 与上面内容的间距 */
+        }
+	
+	/* Case Card Container */
+	.case-container {
+		max-width: 900px;
+		margin: 0 auto 40px;
+	}
+
+	/* Case Card Styles */
+	.case-card {
+		background: #ffffff;
+		border-radius: 10px;
+		padding: 30px 20px; /* Increased padding */
+		margin-bottom: 30px;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+		overflow: hidden; /* Prevent overflow */
+		position: relative; /* Ensure positioning is relative */
+	}
+
+	.case-card h2 {
+		font-size: 24px;
+		color: #007BFF;
+		margin-bottom: 15px;
+		border-bottom: 2px solid #90caf9;
+		padding-bottom: 5px;
+	}
+
+    .avatar-block {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-width: 50px;
+    }
+
+    .speaker-name {
+        font-size: 13px;
+        color: #666;
+        margin-top: 4px;
+        text-align: center;
+        word-break: break-all;
+        max-width: 60px;
+    }
+
+	/* Dialogue Case Styles */
+	.dialogue-case {
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		margin-bottom: 20px;
+		position: relative;
+		padding: 10px 0; /* Space between dialogues */
+	}
+
+	.dialogue-case.left {
+		justify-content: flex-start;
+	}
+
+	.dialogue-case.right {
+		justify-content: flex-end;
+	}
+
+	/* Text bubble styles */
+	.dialogue-case.left .text,
+	.dialogue-case.right .text {
+		background-color: #ffffff;
+		padding: 15px 20px;
+		border-radius: 15px;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+		max-width: 70%;
+		line-height: 1.6;
+		margin-bottom: 10px;
+		position: relative;
+	}
+
+	.dialogue-case.left .text {
+		background-color: #e3f2fd;
+		border: 1px solid #90caf9;
+		margin-left: 15px; /* Prevent overlap with logo */
+	}
+
+	.dialogue-case.right .text {
+		background-color: #fff8e1;
+		border: 1px solid #ffcc80;
+		margin-right: 15px; /* Prevent overlap with logo */
+	}
+
+	/* Audio styles */
+	.dialogue-case audio {
+		outline: none;
+		margin-right: 15px;
+	}
+
+	/* Logo Styles */
+	.dialogue-case .logo {
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+		object-fit: cover;
+	}
+
+	.dialogue-case.left .logo {
+		margin-right: 15px;
+	}
+
+	.dialogue-case.right .logo {
+		margin-left: 15px;
+	}
+	.blue-box {
+	    border: 2px solid lightblue;
+	    padding: 10px;
+	    display: inline-block;
+	    margin-top: 10px;
+	    background-color: #fff2fd; 
+	}
+
+	/* Responsive Styles */
+	@media (max-width: 768px) {
+		.dialogue-case {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+
+		.dialogue-case.right {
+			align-items: flex-end;
+		}
+
+		.dialogue-case audio {
+			margin: 0 0 10px 0;
+		}
+
+		.dialogue-case.left .text,
+		.dialogue-case.right .text {
+			max-width: 100%;
+			text-align: left;
+		}
+
+		.dialogue-case.left .logo,
+		.dialogue-case.right .logo {
+			margin: 0;
+			position: static;
+			width: 30px;
+			height: 30px;
+		}
+	}
+</style>
+</head>
+
+<body>
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+              <h1 id="co-speech-modalities" class="title is-1 publication-title">PACHAT: Persona-Aware Speech Assistant for Multi-party Dialogue</h1>
+<!--               <h1 class="title is-1 publication-title"></h1> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+	  
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+            <h2 class="title is-3">Abstract</h2>
+            <div class="content has-text-justified">
+                <p>
+                    Extensive research on LLM-based spoken dialogue systems has significantly advanced the development of intelligent voice assistants. However, the integration of role information within speech remains an underexplored area, limiting its application in real-world scenarios, particularly in multi-party dialogue settings. With the growing demand for personalization, voice assistants that can recognize and remember users establish a deeper connection with them. We focus on enabling LLMs with speaker-awareness capabilities and enhancing their understanding of character settings through synthetic data to generate contextually appropriate responses. We introduce Persona-Dialogue, the first large-scale multi-party spoken dialogue dataset that incorporates speaker profiles. Based on this dataset, we propose PAChat, an architecture that simultaneously models both linguistic content and speaker features, allowing LLMs to map character settings to speaker identities in speech. Through extensive experiments, we demonstrate that PAChat successfully achieves speaker-specific responses, character understanding, and the generation of targeted replies in multi-party dialogue scenarios, surpassing existing spoken dialogue systems.	    </div>
+      </div>
+      <!--/ Abstract. -->
+    </div>
+  </section>
+
+    <!-- Table of Contents -->
+
+  <!-- <section class="hero">
+    <div class="hero-body">
+        <div class="container">
+          <h1 class="title is-3">OmniChat</h1>
+            <h2><a href="#sharechatx">A. Samples of ShareChatx dataset.</a></h2>
+		    <h4><a href="#emotion">A.1. ShareChatx-Emotion</a></h4>
+		    <h4><a href="#audio">A.2. ShareChatx-Audio</a></h4>
+		    <h4><a href="#music">A.3. ShareChatx-Music</a></h4>
+
+            <h2><a href="#dailytalk1">B.Output samples of OmniChat on Dailytalk dataset.</a></h2>
+
+            <h2><a href="#emotion1">C.Output samples of OmniChat on ShareChatx-Emotion dataset.</a></h2>
+            <h2><a href="#audio1">D.Output samples of OmniChat on ShareChatx-Audio dataset.</a></h2>
+	    <h2><a href="#music1">E.Output samples of OmniChat on ShareChatx-Music dataset.</a></h2>
+		
+          </ul>
+        </div>
+    </div>
+  </section> -->
+
+
+  
+<section class="hero">
+    <div class="hero-body">
+        <div class="container">
+            <h1 id="sharechatx" class="title is-3">Samples of Persona-Dialogue dataset.</h1>
+			<img class="img" src="res/fig1.png" style="display: block; margin: 0 auto; max-width: 60%; height: auto; border: 2px solid lightgray;">
+			<!-- <h4 id="emotion" class="title is-4" style="text-align: center;margin-top: 20px;">A.1. ShareChatx-Emotion</h4> -->
+				<div class="case-container">
+					<div class="case-card">
+						<h2>Case 1</h2>
+                        <div style="border:2px solid #b0c4de; border-radius:10px; padding:18px; margin-bottom:30px; background-color:#f7faff;">
+                            <strong>Scenario：</strong> Family life<br>
+                            <strong>Theme：</strong> Weekly Grocery Shopping List<br>
+                            <strong>User：</strong>
+                            <pre style="white-space:pre-wrap; background: #f5f5f5; border-radius: 8px; padding: 12px; margin-top: 8px; font-size: 14px;">
+                                  {
+                                      "name": "George Hanson",
+                                      "identity": "Father",
+                                      "description": [
+                                          "George is a middle-aged man with spectacles and a hearty laugh.",
+                                          "A software engineer by profession, he cherishes quiet evenings reading books.",
+                                          "He is a practical thinker, with a dry sense of humor that often has the family in stitches.",
+                                          "Caring and soft-hearted, George is always there for his children even amidst a busy schedule.",
+                                          "Outdoor activities like camping, fishing and hiking appeal to him."
+                                      ]
+                                  },
+                                  {
+                                      "name": "Lisa Hanson",
+                                      "identity": "Mother",
+                                      "description": [
+                                          "Lisa is a woman full of energy and zest.",
+                                          "She's a teacher who loves connecting with her students.",
+                                          "Right from cooking, painting, to managing household chores, she's multitasking always.",
+                                          "She is understanding, patient and fiercely protective of her family.",
+                                          "Lisa enjoys gardening and long walks in the park every evening."
+                                      ]
+                                  },
+                                  {
+                                      "name": "Abigail Hanson",
+                                      "identity": "Eldest Daughter",
+                                      "description": [
+                                          "Abigail is an 18-year-old teenager, about to go to college.",
+                                          "She is studious, ambitious, and slightly introverted.",
+                                          "Music is her life - she loves playing the piano and listening to classical music.",
+                                          "She usually wears glasses, but switches to contact lenses for special occasions.",
+                                          "Abigail is mature for her age and is often seen guiding her younger siblings."
+                                      ]
+                                  },
+                                  {
+                                      "name": "Ben Hanson",
+                                      "identity": "Son",
+                                      "description": [
+                                          "Ben, the 16-year-old lad is full of life and the energy of the house.",
+                                          "As an aspiring basketball player, he always practices in the backyard.",
+                                          "He has a mischievous side, always ready to pull pranks on family and friends.",
+                                          "His jovial attitude and carefree spirit are what set him apart from his siblings.",
+                                          "Despite his tomfoolery, Ben is compassionate and caring towards his family."
+                                      ]
+                                  }
+                            </pre>
+                          </div>
+						<div class="dialogue-case left">
+						    <div class="avatar-block">
+                                <img class="logo" src="res/human.png" alt="User Logo">
+                                <div class="speaker-name">George</div>
+                            </div>
+						    <audio controls>
+						        <source src="res/a/1.wav" type="audio/wav">
+						        Your browser does not support the audio element.
+						    </audio>
+						    <div class="text">
+						        Let’s talk about this week’s shopping list. Looks like we’re running low on groceries.
+						    </div>
+						</div>
+
+                        <div class="dialogue-case left">
+						    <div class="avatar-block">
+                                <img class="logo" src="res/human.png" alt="User Logo">
+                                <div class="speaker-name">Lisa</div>
+                            </div>
+						    <audio controls>
+						        <source src="res/a/2.wav" type="audio/wav">
+						        Your browser does not support the audio element.
+						    </audio>
+						    <div class="text">
+						        Yes, we’re almost out of the usual breakfast items, and there’s not much fruit left. Does anyone want to add anything special?
+						    </div>
+						</div>
+
+                        <div class="dialogue-case left">
+						    <div class="avatar-block">
+                                <img class="logo" src="res/human.png" alt="User Logo">
+                                <div class="speaker-name">Abigail</div>
+                            </div>
+						    <audio controls>
+						        <source src="res/a/3.wav" type="audio/wav">
+						        Your browser does not support the audio element.
+						    </audio>
+						    <div class="text">
+						        I’d like some nuts and yogurt for study snacks, and we’re almost out of whole wheat bread. Can we add those?
+						    </div>
+						</div>
+
+                        <div class="dialogue-case left">
+						    <div class="avatar-block">
+                                <img class="logo" src="res/human.png" alt="User Logo">
+                                <div class="speaker-name">Ben</div>
+                            </div>
+						    <audio controls>
+						        <source src="res/a/4.wav" type="audio/wav">
+						        Your browser does not support the audio element.
+						    </audio>
+						    <div class="text">
+						        I want energy bars and sports drinks, and also pasta and tomato sauce for dinner.
+						    </div>
+						</div>
+
+
+                        <div class="dialogue-case left">
+						    <div class="avatar-block">
+                                <img class="logo" src="res/human.png" alt="User Logo">
+                                <div class="speaker-name">George</div>
+                            </div>
+						    <audio controls>
+						        <source src="res/a/5.wav" type="audio/wav">
+						        Your browser does not support the audio element.
+						    </audio>
+						    <div class="text">
+						        Seems like our list is getting long. Anything else we should include?
+						    </div>
+						</div>
+
+
+                        <div class="dialogue-case left">
+						    <div class="avatar-block">
+                                <img class="logo" src="res/human.png" alt="User Logo">
+                                <div class="speaker-name">Lisa</div>
+                            </div>
+						    <audio controls>
+						        <source src="res/a/6.wav" type="audio/wav">
+						        Your browser does not support the audio element.
+						    </audio>
+						    <div class="text">
+						        We’re also low on seasonings like olive oil and black pepper. Let’s get fresh vegetables too—salads are nice in this weather.
+						    </div>
+						</div>
+
+                        <div class="dialogue-case left">
+						    <div class="avatar-block">
+                                <img class="logo" src="res/human.png" alt="User Logo">
+                                <div class="speaker-name">Abigail</div>
+                            </div>
+						    <audio controls>
+						        <source src="res/a/7.wav" type="audio/wav">
+						        Your browser does not support the audio element.
+						    </audio>
+						    <div class="text">
+						        We’re almost out of cereal as well. Should we try a new flavor?
+						    </div>
+						</div>
+
+                        <div class="dialogue-case left">
+						    <div class="avatar-block">
+                                <img class="logo" src="res/human.png" alt="User Logo">
+                                <div class="speaker-name">Ben</div>
+                            </div>
+						    <audio controls>
+						        <source src="res/a/8.wav" type="audio/wav">
+						        Your browser does not support the audio element.
+						    </audio>
+						    <div class="text">
+						        As long as it’s not one of those tasteless healthy ones, haha!
+						    </div>
+						</div>
+
+                        <div class="dialogue-case left">
+						    <div class="avatar-block">
+                                <img class="logo" src="res/human.png" alt="User Logo">
+                                <div class="speaker-name">George</div>
+                            </div>
+						    <audio controls>
+						        <source src="res/a/9.wav" type="audio/wav">
+						        Your browser does not support the audio element.
+						    </audio>
+						    <div class="text">
+						        We’ll need a detailed list this time. Butler, do you think there’s anything else we should add?
+						    </div>
+						</div>
+
+                        <div class="dialogue-case right">
+                            <div class="text">
+                                Mr. George, since you often enjoy outdoor activities, I suggest adding some barbecue-friendly items like steak and sausages. Also, as there are teenagers and young children in the house, it’s a good idea to include some healthy snacks and drinks.
+                            </div>
+                            <audio controls>
+                                <source src="res/a/10.wav" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio>
+                            <div class="avatar-block">
+                                <img class="logo" src="res/human2.png" alt="System Logo">
+                                <div class="speaker-name">Butler</div>
+                            </div>
+                        </div>
+
+					</div>
+
+
+                    <div class="case-card">
+						<h2>Case 2</h2>
+                        <div style="border:2px solid #b0c4de; border-radius:10px; padding:18px; margin-bottom:30px; background-color:#f7faff;">
+                            <strong>Scenario：</strong>Company meeting<br>
+                            <strong>Theme：</strong>Future Investment Ideas<br>
+                            <strong>User：</strong>
+                            <pre style="white-space:pre-wrap; background: #f5f5f5; border-radius: 8px; padding: 12px; margin-top: 8px; font-size: 14px;">
+								{
+									"name": "Lisa Branson",
+									"identity": "Marketing Director",
+									"description": [
+										"Lisa Branson is the Marketing Director. She is a powerhouse in the field of commerce, known for her innovative marketing strategies.",
+										"Her charismatic charm often wins over clients effortlessly.",
+										"She usually disagrees with John on many issues during meetings, leading to productive debates.",
+										"Branson loves to travel and often brings back souvenirs for her colleagues.",
+										"Despite her success, she remains approachable and is a mentor to many of the junior staff."
+									]
+								},
+								{
+									"name": "Tom Clark",
+									"identity": "Financial Manager",
+									"description": [
+										"Tom Clark is the meticulous Financial Manager. He is the man with the numbers and is often seen with his calculator and spreadsheets.",
+										"An introvert by nature, Clark prefers letting his work do the talking.",
+										"He is respected for his analytical skills and helping the company survive tough times.",
+										"Clark is a chess enthusiast and often likens strategic financial planning to a game of chess.",
+										"Although he tends to keep to himself, he's known to make sarcastic comments that lighten the mood during meetings."
+									]
+								},
+								{
+									"name": "Kim Landon",
+									"identity": "HR Manager",
+									"description": [
+										"Kim Landon is the empathetic HR Manager. She is the go-to person for any staff-related issues and grievances.",
+										"Landon is loved by her colleagues for her pro-employee policies.",
+										"She enjoys her early morning yoga before starting her day.",
+										"She is an advocate for work-life balance and mental health awareness in the workplace.",
+										"Her open-door policy makes other employees feel heard and respected."
+									]
+								}
+                            </pre>
+                          </div>
+						<div class="dialogue-case left">
+						    <div class="avatar-block">
+                                <img class="logo" src="res/human.png" alt="User Logo">
+                                <div class="speaker-name">Lisa</div>
+                            </div>
+						    <audio controls>
+						        <source src="res/b/1.wav" type="audio/wav">
+						        Your browser does not support the audio element.
+						    </audio>
+						    <div class="text">
+						        I think we could consider investing more in eco-friendly things in the future, like green tech or environmentally friendly products. People care about the environment more nowadays, and these products are getting popular. What do you think?
+						    </div>
+						</div>
+
+                        <div class="dialogue-case left">
+						    <div class="avatar-block">
+                                <img class="logo" src="res/human.png" alt="User Logo">
+                                <div class="speaker-name">Tom</div>
+                            </div>
+						    <audio controls>
+						        <source src="res/b/2.wav" type="audio/wav">
+						        Your browser does not support the audio element.
+						    </audio>
+						    <div class="text">
+								Sounds good, but I’m a bit worried about how long it’ll take to get our money back. The market changes quickly—could this be a bit risky? Lisa, do you really think people will buy these products?
+						    </div>
+						</div>
+
+                        <div class="dialogue-case left">
+						    <div class="avatar-block">
+                                <img class="logo" src="res/human.png" alt="User Logo">
+                                <div class="speaker-name">Lisa</div>
+                            </div>
+						    <audio controls>
+						        <source src="res/b/3.wav" type="audio/wav">
+						        Your browser does not support the audio element.
+						    </audio>
+						    <div class="text">
+								That’s a fair point. But nowadays, lots of young people are willing to pay extra for eco-friendly stuff. If we promote it well, I think we’ll have a good chance.
+						    </div>
+						</div>
+
+                        <div class="dialogue-case left">
+						    <div class="avatar-block">
+                                <img class="logo" src="res/human.png" alt="User Logo">
+                                <div class="speaker-name">Kim</div>
+                            </div>
+						    <audio controls>
+						        <source src="res/b/4.wav" type="audio/wav">
+						        Your browser does not support the audio element.
+						    </audio>
+						    <div class="text">
+						        I support eco-friendly investments too. It makes employees feel proud of the company, and people might work even harder. If you’re worried about the risk, we could start small and not spend too much at first.
+						    </div>
+						</div>
+
+
+                        <div class="dialogue-case left">
+						    <div class="avatar-block">
+                                <img class="logo" src="res/human.png" alt="User Logo">
+                                <div class="speaker-name">Tom</div>
+                            </div>
+						    <audio controls>
+						        <source src="res/b/5.wav" type="audio/wav">
+						        Your browser does not support the audio element.
+						    </audio>
+						    <div class="text">
+								That sounds more reasonable. If we really do this, how much do you think we’d need to spend on promotion at the start? Any rough ideas?
+						    </div>
+						</div>
+
+
+                        <div class="dialogue-case left">
+						    <div class="avatar-block">
+                                <img class="logo" src="res/human.png" alt="User Logo">
+                                <div class="speaker-name">Lisa</div>
+                            </div>
+						    <audio controls>
+						        <source src="res/b/6.wav" type="audio/wav">
+						        Your browser does not support the audio element.
+						    </audio>
+						    <div class="text">
+								That’s an important question. Assiatant, could you use our past promotion experience to help us estimate how much we’d need to spend on marketing for an eco-friendly project in the beginning?
+						    </div>
+						</div>
+
+                        <div class="dialogue-case right">
+                            <div class="text">
+								Based on Lisa’s marketing experience, for a green tech project, it’s best to set an initial moderate marketing budget—enough for exposure but not too risky. Considering Tom’s concerns, we can start small and scale up gradually to keep returns manageable.
+                            </div>
+                            <audio controls>
+                                <source src="res/b/7.wav" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio>
+                            <div class="avatar-block">
+                                <img class="logo" src="res/human2.png" alt="System Logo">
+                                <div class="speaker-name">Assiatant</div>
+                            </div>
+                        </div>
+						
+					</div>
+
+
+
+					<div class="case-card">
+						<h2>Case 3</h2>
+                        <div style="border:2px solid #b0c4de; border-radius:10px; padding:18px; margin-bottom:30px; background-color:#f7faff;">
+                            <strong>Scenario：</strong>School classroom<br>
+                            <strong>Theme：</strong>Cultural Event Planning<br>
+                            <strong>User：</strong>
+                            <pre style="white-space:pre-wrap; background: #f5f5f5; border-radius: 8px; padding: 12px; margin-top: 8px; font-size: 14px;">
+								{
+									"name": "Mrs. Thompson",
+									"identity": "Teacher",
+									"description": [
+										"Mrs. Thompson is an experienced educator with a warm personality.",
+										"She carries a sense of authority that inspires respect but maintains a caring approach towards her students.",
+										"Her engaging teaching style helps to foster a love of learning within her classroom.",
+										"Mrs. Thompson has a sharp eye for detail, spotting students who may need extra support.",
+										"Aside from teaching, she spends her spare time indulging in her love for painting."
+									]
+								},
+								{
+									"name": "John",
+									"identity": "Student",
+									"description": [
+										"John is a quiet, reserved student who is more comfortable around books than people.",
+										"He excels in academics, particularly mathematics and science.",
+										"Despite his introverted nature, he is empathetic and always willing to help his classmates.",
+										"John has a hidden talent in chess and often competes in school tournaments.",
+										"His dream is to become an astronaut, a passion spurred by his fascination with the cosmos."
+									]
+								},
+								{
+									"name": "Emma",
+									"identity": "Student",
+									"description": [
+										"Emma is the vivacious class president, who is beloved by her peers for her cheerful nature.",
+										"She excels in public speaking and is always first to volunteer for any school event.",
+										"Emma is naturally athletic, being a part of the school's soccer team.",
+										"Her energetic personality is infectious and she has an innate talent to motivate others.",
+										"She aspires to pursue a career in politics or social work."
+									]
+								},
+								{
+									"name": "Rachel",
+									"identity": "Student",
+									"description": [
+										"Rachel is a popular student with a flair for fashion and makeup.",
+										"Known for her sense of humor, she is often the life of the party.",
+										"Despite her popularity, Rachel is down-to-earth and friendly towards everyone.",
+										"She has a passion for photography and manages the school yearbook.",
+										"Rachel hopes to create her own fashion line one day."
+									]
+								}
+                            </pre>
+                          </div>
+						<div class="dialogue-case left">
+						    <div class="avatar-block">
+                                <img class="logo" src="res/human.png" alt="User Logo">
+                                <div class="speaker-name">Emma</div>
+                            </div>
+						    <audio controls>
+						        <source src="res/c/1.wav" type="audio/wav">
+						        Your browser does not support the audio element.
+						    </audio>
+						    <div class="text">
+						        For our cultural event planning, I think we could organize a multicultural festival where everyone can showcase food and performances from different countries. What do you all think?
+						    </div>
+						</div>
+
+
+
+                        <div class="dialogue-case left">
+						    <div class="avatar-block">
+                                <img class="logo" src="res/human.png" alt="User Logo">
+                                <div class="speaker-name">John</div>
+                            </div>
+						    <audio controls>
+						        <source src="res/c/2.wav" type="audio/wav">
+						        Your browser does not support the audio element.
+						    </audio>
+						    <div class="text">
+								That sounds great. But I was wondering, for students who are shy and might not want to perform on stage, could we design some quieter activities, like chess tournaments or small science exhibitions?
+						    </div>
+						</div>
+
+
+                        <div class="dialogue-case left">
+						    <div class="avatar-block">
+                                <img class="logo" src="res/human.png" alt="User Logo">
+                                <div class="speaker-name">Mrs. Thompson</div>
+                            </div>
+						    <audio controls>
+						        <source src="res/c/3.wav" type="audio/wav">
+						        Your browser does not support the audio element.
+						    </audio>
+						    <div class="text">
+								We could set up different zones—like a performance area, a food area, and a quiet activity area. Rachel, how do you think?
+						    </div>
+						</div>
+
+
+                        <div class="dialogue-case left">
+						    <div class="avatar-block">
+                                <img class="logo" src="res/human.png" alt="User Logo">
+                                <div class="speaker-name">Rachel</div>
+                            </div>
+						    <audio controls>
+						        <source src="res/c/4.wav" type="audio/wav">
+						        Your browser does not support the audio element.
+						    </audio>
+						    <div class="text">
+						        I think we could organize a fashion show or a creative costume display, allowing students to express the characteristics of different cultures through clothing and styling, which would also make the event more fun. By the way, Assistant, do you have any suggestions for how to arrange and decorate the school space?
+						    </div>
+						</div>
+
+
+                        <div class="dialogue-case right">
+                            <div class="text">
+								Rachel, as you manage the yearbook and photography, you could organize a team to capture the event. Based on Emma and John’s ideas, I suggest using the playground as the main venue and dividing it into activity sections. This will make each area easy to highlight and document.
+                            </div>
+                            <audio controls>
+                                <source src="res/c/5.wav" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio>
+                            <div class="avatar-block">
+                                <img class="logo" src="res/human2.png" alt="System Logo">
+                                <div class="speaker-name">Assistant</div>
+                            </div>
+                        </div>
+						
+					</div>
+
+
+
+					<div class="case-card">
+						<h2>Case 4</h2>
+                        <div style="border:2px solid #b0c4de; border-radius:10px; padding:18px; margin-bottom:30px; background-color:#f7faff;">
+                            <strong>Scenario：</strong>Park<br>
+                            <strong>Theme：</strong>Talking about their pets<br>
+                            <strong>User：</strong>
+                            <pre style="white-space:pre-wrap; background: #f5f5f5; border-radius: 8px; padding: 12px; margin-top: 8px; font-size: 14px;">
+								{
+									"name": "Linda Watson",
+									"identity": "Single Mother",
+									"description": [
+										"Linda Watson is a single mom with two energetic boys",
+										" She works as a nurse during the week and tries to spend most weekends in the park with her sons",
+										" Her tired eyes cannot conceal the love and affection she carries for her children",
+										" Despite the everyday hardship, she manages to keep a heartwarming smile on her face",
+										" She's also a regular volunteer at the local community center."
+									]
+								},
+								{
+									"name": "Paul Stevens",
+									"identity": "Retiree",
+									"description": [
+										"Paul Stevens is a retired professor living alone since the passing of his wife",
+										" He comes to the park to enjoy the tranquility and nature, often seen feeding the swans by the lake",
+										" He enjoys sharing stories from his past with anyone willing to lend an ear",
+										" Paul also carries a book everywhere as reading is his number one passion",
+										" His gentle demeanor and warm heart make him loved among regular park goers."
+									]
+								},
+								{
+									"name": "Emily Decker",
+									"identity": "University Student",
+									"description": [
+										"Emily Decker is an outgoing University student on an athletic scholarship",
+										" She's often at the park in the early morning jogging for her cardiovascular training",
+										" Smart, confident, and ambitious, Emily has her eyes set on the Olympics",
+										" She's majoring in computer science, managing to balance her studies and training flawlessly",
+										" Not only she is talented in sports, but she's also an artist, often sketching park scenes."
+									]
+								}
+                            </pre>
+                          </div>
+						<div class="dialogue-case left">
+						    <div class="avatar-block">
+                                <img class="logo" src="res/human.png" alt="User Logo">
+                                <div class="speaker-name">Emily</div>
+                            </div>
+						    <audio controls>
+						        <source src="res/d/1.wav" type="audio/wav">
+						        Your browser does not support the audio element.
+						    </audio>
+						    <div class="text">
+						        Hi everyone, do you have any pets? I’ve been thinking about getting a puppy, but I’m worried my training and study schedule is too packed, and I might not be able to take good care of it.
+							</div>
+						</div>
+					
+
+                        <div class="dialogue-case left">
+						    <div class="avatar-block">
+                                <img class="logo" src="res/human.png" alt="User Logo">
+                                <div class="speaker-name">Linda</div>
+                            </div>
+						    <audio controls>
+						        <source src="res/d/2.wav" type="audio/wav">
+						        Your browser does not support the audio element.
+						    </audio>
+						    <div class="text">
+								I have a cat at home, and she’s my two boys’ best friend. Having a pet does take time, but they bring so much joy and warmth to the family. Emily, have you thought about what breed of dog you’d want?
+						    </div>
+						</div>
+
+                        <div class="dialogue-case left">
+						    <div class="avatar-block">
+                                <img class="logo" src="res/human.png" alt="User Logo">
+                                <div class="speaker-name">Paul</div>
+                            </div>
+						    <audio controls>
+						        <source src="res/d/3.wav" type="audio/wav">
+						        Your browser does not support the audio element.
+						    </audio>
+						    <div class="text">
+								I had a golden retriever when I was younger—gentle and smart. I don’t have a pet now, but feeding the swans in the park feels just as comforting. Emily, since you love sports, maybe consider an active breed, like a border collie.
+						    </div>
+						</div>
+
+                        <div class="dialogue-case left">
+						    <div class="avatar-block">
+                                <img class="logo" src="res/human.png" alt="User Logo">
+                                <div class="speaker-name">Paul</div>
+                            </div>
+						    <audio controls>
+						        <source src="res/d/4.wav" type="audio/wav">
+						        Your browser does not support the audio element.
+						    </audio>
+						    <div class="text">
+						        I support eco-friendly investments too. It makes employees feel proud of the company, and people might work even harder. If you’re worried about the risk, we could start small and not spend too much at first.
+						    </div>
+						</div>
+
+
+                        <div class="dialogue-case left">
+						    <div class="avatar-block">
+                                <img class="logo" src="res/human.png" alt="User Logo">
+                                <div class="speaker-name">Linda</div>
+                            </div>
+						    <audio controls>
+						        <source src="res/d/5.wav" type="audio/wav">
+						        Your browser does not support the audio element.
+						    </audio>
+						    <div class="text">
+								I think cats are more independent, which works well for busy families, but dogs are more affectionate and interact more with kids. Paul is right—pets really do bring a sense of companionship.
+						    </div>
+						</div>
+
+
+                        <div class="dialogue-case left">
+						    <div class="avatar-block">
+                                <img class="logo" src="res/human.png" alt="User Logo">
+                                <div class="speaker-name">Emily</div>
+                            </div>
+						    <audio controls>
+						        <source src="res/d/6.wav" type="audio/wav">
+						        Your browser does not support the audio element.
+						    </audio>
+						    <div class="text">
+								Assistant, you work with animals every day. What kind of pet do you think suits someone like me?
+						    </div>
+						</div>
+
+                        <div class="dialogue-case right">
+                            <div class="text">
+								Emily, you might consider an energetic, easy-to-care-for medium-sized dog, like a border collie or a labrador. They love exercise and would fit your lifestyle. As Linda said, pets bring joy and warmth to life. I hope you find the perfect companion soon!
+                            </div>
+                            <audio controls>
+                                <source src="res/d/7.wav" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio>
+                            <div class="avatar-block">
+                                <img class="logo" src="res/human2.png" alt="System Logo">
+                                <div class="speaker-name">Assiatant</div>
+                            </div>
+                        </div>
+						
+					</div>
+
+
+				</div>
+		</div>
+    </div>
+</section>
+
+<footer>
+    <p id="footnote">*All responses are generated based on the spoken dialogue system and synthesized using CosyVoice.</p>
+</footer>
+
+</body>
+</html>
+
