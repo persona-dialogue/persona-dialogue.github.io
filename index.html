@@ -70,14 +70,17 @@
     }
 
     .speaker-name {
-		font-size: 13px;
-		color: #2e5c8a;         /* 与上述名字颜色一致 */
-		font-weight: bold;      /* 加粗 */
-		margin-top: 4px;
-		text-align: center;
-		word-break: break-all;
-		max-width: 60px;
+	    font-size: 13px;
+	    color: #2e5c8a;
+	    font-weight: bold;
+	    margin-top: 4px;
+	    text-align: center;
+	    white-space: nowrap;       /* 保证一行内显示 */
+	    overflow: hidden;          /* 超出部分隐藏 */
+	    text-overflow: ellipsis;   /* 超出部分用省略号 */
+	    max-width: 100px;          /* 可根据实际情况调整 */
 	}
+
 
 	/* Dialogue Case Styles */
 	.dialogue-case {
@@ -289,8 +292,7 @@
 								<span>Despite his tomfoolery, Ben is compassionate and caring towards his family.</span>
 							  </div>
 							</div>
-						  </div>
-我也算了吧你说						  
+						  </div>						  
 						<div class="dialogue-case left">
 						    <div class="avatar-block">
                                 <img class="logo" src="res/human.png" alt="User Logo">
